@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--与mapper文件夹下的XXXmapper相绑定-->
+<mapper namespace="com.example.mapper.CateMapper">
+
+    <select id="getCate" resultType="com.example.bean.Cate">
+        select * from cate where cateId=#{id}
+    </select>
+
+
+</mapper>

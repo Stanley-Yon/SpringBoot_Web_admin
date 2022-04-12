@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    username: root
+    password: 194a31hz
+    url: jdbc:mysql://localhost:3306/ssm_carstore
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+    druid:
+      aop-patterns:
+        com.example.*
+      filters: wall, stat   #Druid   wall--防火墙  stat--sql监控
+
+      stat-view-servlet:  # 配置监控页功能
+        enabled: true
+        login-username: admin
+        login-password: admin
+        reset-enable: false
+
+      web-stat-filter:  #监控Web
+        enable: true
+        url-pattern: /*
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+
+      filter:
+        stat: # 对上面filters里面的stat的详细配置
+          slow-sql-millis: 1000
+          logSlowSql: true
+          enabled: true
+        wall:
+          enabled: true
+          config:
+            drop-table-allow: false
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+
+
+

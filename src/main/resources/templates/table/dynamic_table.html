@@ -55,32 +55,77 @@
                 <a href="javascript:;" class="fa fa-times"></a>
              </span>
         </header>
-        <div class="panel-body">
-        <div class="adv-table">
-        <table  class="display table table-bordered table-striped" id="dynamic-table">
-        <thead>
-        <tr>
-            <th>序号</th>
-            <th>用户名</th>
-            <th>密码</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="gradeX" th:each="user,status :${users}">
-            <td th:text="${status.count}"></td>
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.password}"></td>
-<!--            <td>[[${status.count}]]</td>-->
-<!--            <td>[[${user.username}]]</td>-->
-<!--            <td>[[${user.password}]]</td>-->
-        </tr>
+            <div class="panel-body">
+                <div class="adv-table">
+                    <table  class="display table table-bordered table-striped" id="dynamic-table">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>name</th>
+                            <th>age</th>
+                            <th>email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="gradeX" th:each="user,stat:${users.records}">
+                            <td th:text="${stat.count}"></td>
+                            <td th:text="${user.id}"></td>
+                            <td th:text="${user.name}"></td>
+                            <td th:text="${user.age}"></td>
+                            <td th:text="${user.email}"></td>
+                            <td>
+                                <a th:href="@{/user/delete/{id}(id=${user.id},pn=${users.current})}"
+                                   class="btn btn-danger btn-sm" type="button">删除</a>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                    </table>
+
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <div class="dataTables_info" id="hidden-table-info_info">
+                                当前第[[${users.current}]]页  总计 [[${users.pages}]]页  共[[${users.total}]]条记录
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <div class="dataTables_paginate paging_bootstrap pagination">
+                            <ul>
+                                <li class="prev"><a href="#">前一页</a></li>
+                                <li th:class="${num == users.current?'active':''}"
+                                    th:each="num:${#numbers.sequence(1,users.pages)}">
+                                    <a th:href="@{ /dynamic_table(pn=${num}) }">[[${num}]]</a></li>
+                                <li class="next"><a href="#">后一页</a></li>
+                            </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="adv-second">
+                    <table  class="display table table-bordered table-striped" id="second-table">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>用户名</th>
+                            <th>密码</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="gradeX" th:each="user,status :${users}">
+                            <td th:text="${status.count}"></td>
+                            <td th:text="${user.username}"></td>
+                            <td th:text="${user.password}"></td>
+                            <!--            <td>[[${status.count}]]</td>-->
+                            <!--            <td>[[${user.username}]]</td>-->
+                            <!--            <td>[[${user.password}]]</td>-->
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
 
 
-        </tbody>
-        </table>
-
-        </div>
-        </div>
+            </div>
         </section>
         </div>
         </div>

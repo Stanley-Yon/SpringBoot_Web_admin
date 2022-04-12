@@ -13,11 +13,11 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 //        String requestURI = request.getRequestURI();
-//        log.info("拦截的请求："+requestURI);//日志打印 /main (请求)
+//        log.info("拦截的请求："+requestURI);      //日志打印 /main (请求)
 
         //地址拦当中完成的URL，如http://localhost:8080/main
-//        StringBuffer requestURL = request.getRequestURL();
-//        log.info("拦截："+requestURL);
+        StringBuffer requestURL = request.getRequestURL();
+        log.info("拦截："+requestURL);
 
         HttpSession session = request.getSession();
         Object loginUser = session.getAttribute("loginUser");
