@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @Slf4j
-@SpringBootTest
+@SpringBootTest     //springboot的测试类
 class SpringBootWebAdminApplicationTests {
 
     @Autowired
@@ -21,7 +21,6 @@ class SpringBootWebAdminApplicationTests {
     void contextLoads() {
         Integer integer = jdbcTemplate.queryForObject("select count(*) from cate", int.class);
         System.out.println("查询总数:"+integer.toString());
-
     }
 
     @Test
