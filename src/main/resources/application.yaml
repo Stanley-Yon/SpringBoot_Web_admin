@@ -30,11 +30,37 @@ spring:
           enabled: true
           config:
             drop-table-allow: false
+  boot:
+    admin:
+      client:
+        url: http://localhost:8088
+        instance:
+          prefer-ip: true
+  application:
+    name: SpringBoot_Web_admin
 
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 
+management:
+  endpoints:
+    enabled-by-default: true   #暴露所有的端点
+    web:
+      exposure:
+        include: '*'  #以web方式暴露
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+    metrics:
+      enabled: true
 
 
-
+#定制info信息
+info:
+  appName: "我的项目"
+  appVersion: 1.2.2
+#  mavenName: @project.artifactId@
+#  mavenVersion: @project.version@
+#  mavenDescription: @project.groupId@

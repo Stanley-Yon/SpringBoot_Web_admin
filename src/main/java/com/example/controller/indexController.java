@@ -1,6 +1,8 @@
 package com.example.controller;
 
 import com.example.bean.User;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -11,12 +13,19 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class indexController {
+    Counter counter;
+    public indexController(MeterRegistry meterRegistry){
+        counter = meterRegistry.counter("login");
+    }
     /**
      * 来登录页面
      * @return
      */
     @GetMapping(value = {"/","/login"})
     public String loginPage(){
+
+        counter.increment();    // 提交一次计数   ---actuator 中的info记录
+
         return "login";
     }
 
@@ -27,6 +36,7 @@ public class indexController {
      */
     @PostMapping(value = "login")
     public String mainPage(User user, Model model,HttpSession session) {
+
         if (StringUtils.hasLength(user.getUsername()) && user.getPassword().equals("123")) {
             session.setAttribute("loginUser",user);
             return "redirect:main";
